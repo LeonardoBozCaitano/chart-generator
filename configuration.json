@@ -1,0 +1,42 @@
+{
+    "bar" : {
+        "plot": "true",
+        "outputfile": "bar_result.png",
+        "file": "../senior-results/testes.csv",
+        "fields": ["responseCode", "latency", "bytes", "idleTime"],
+        "data_generator": {
+            "filters": {
+                "module": null,
+                "latency": null,
+                "bytes": null
+            },
+            "groupers": ["responseCode"],
+            "agg": {"latency":"median", "bytes":"median"}
+        }
+    },
+    "chart": {
+        "plot": "false",
+        "outputfile": "chart_result.png",
+        "files": [
+            "../senior-results/testes.csv",
+            "../senior-results/testes.csv",
+            "../senior-results/testes.csv"
+        ],
+        "labels": [
+            "100 users",
+            "200 users",
+            "300 users"
+        ],
+        "data_generator": {
+            "filters": {
+                "module": {
+                    "value": "Painel"
+                },
+                "latency": null,
+                "bytes": null
+            },
+            "groupers": null,
+            "agg": {"latency":"median", "bytes":"max"}
+        }
+    }
+}
