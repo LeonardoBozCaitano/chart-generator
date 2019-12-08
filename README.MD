@@ -15,17 +15,5 @@ pip install matplotlib
 python main.py
 ```
 
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
-
-timeStamp,date,elapsed,label,primitive,module,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,url,latency,idleTime,connect
-
-
 ## To dos
-    criar um package para instalar todas dependencias solito
+    criar um package para instalar todas dependencias automaticamente
