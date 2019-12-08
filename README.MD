@@ -23,3 +23,9 @@ Please make sure to update tests as appropriate.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
+
+timeStamp,date,elapsed,label,primitive,module,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,url,latency,idleTime,connect
+
+
+## To dos
+    criar um package para instalar todas dependencias solito

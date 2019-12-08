@@ -26,7 +26,7 @@ def generate(configuration):
         file_data = common.read_file(file)
         data = generate_data(file_data, configuration["data_generator"])
         rect = ax.bar(i, data*(i+1))
-        autolabel(ax,rect)
+        add_bar(ax, rect)
         i = i + 1
 
     #custom_lines = [Patch(edgecolor="black"),
@@ -35,9 +35,9 @@ def generate(configuration):
 
     plt.xticks(np.arange(i), configuration["labels"])
 
-    plt.title('Média de latência por quantidade de usuarios')
-    plt.xlabel('Quantidade de usuarios')
-    plt.ylabel('Tempo')
+    plt.title(configuration["graphic"]["title"])
+    plt.xlabel(configuration["graphic"]["xlabel"])
+    plt.ylabel(configuration["graphic"]["ylabel"])
 
     if(configuration["outputfile"]):
         plt.savefig(configuration["outputfile"])
@@ -47,17 +47,29 @@ def generate(configuration):
 
 # Gerar o dataset para montar o gráfico
 def generate_data(file_data, configuration):
-    filtered_data = common.filter_dataset(file_data, configuration)["latency"]
-    
+    column = configuration["groupers"]["column"]
+
+    filtered_data = common.filter_dataset(file_data, configuration)
+    filtered_data = filtered_data[column]
+
+    if(configuration["agg"]):
+         filtered_data.agg(configuration["agg"])
+
     #grouper
-    grouped_data = filtered_data.agg({'latency':'median'})
+    grouped_data = filtered_data
 
-    dataSetResult = statistics.median(grouped_data)
-
+    # Median (middle value) of data.
+    if (configuration["groupers"]["type"]=="median"):
+        dataSetResult = statistics.median(grouped_data)
+        
+    # Arithmetic mean (“average”) of data.
+    if (configuration["groupers"]["type"]=="mean"):
+        dataSetResult = statistics.mean(grouped_data)
+    
     return dataSetResult
 
-#Attach a text label above each bar displaying its height
-def autolabel(ax,rects):
+#add bar
+def add_bar(ax,rects):
     hfont2 = {'fontname':'Helvetica','fontsize':12}
     for rect in rects:
         height = rect.get_height()

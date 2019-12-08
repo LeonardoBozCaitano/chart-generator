@@ -1,42 +1,65 @@
 {
     "bar" : {
-        "plot": "true",
+        "plot": "false",
         "outputfile": "bar_result.png",
         "file": "../senior-results/testes.csv",
-        "fields": ["responseCode", "latency", "bytes", "idleTime"],
+        "fields": ["module", "primitive","latency", "bytes", "idleTime"],
         "data_generator": {
             "filters": {
-                "module": null,
+                "module": {
+                    "value": "Painel"
+                },
+                "primitive": null,
                 "latency": null,
                 "bytes": null
             },
-            "groupers": ["responseCode"],
-            "agg": {"latency":"median", "bytes":"median"}
+            "groupers": ["module", "primitive"],
+            "agg": {"latency":"median", "bytes":"median", "idleTime":"median"}
+        },
+        "graphic": {
+            "title": "Media de latencia e bytes por primitiva",
+            "xlabel": "Tempo",
+            "ylabel": "(Modulo, primitiva)"
         }
     },
     "chart": {
-        "plot": "false",
+        "plot": "true",
         "outputfile": "chart_result.png",
         "files": [
+            "../senior-results/testes.csv",
+            "../senior-results/testes.csv",
             "../senior-results/testes.csv",
             "../senior-results/testes.csv",
             "../senior-results/testes.csv"
         ],
         "labels": [
-            "100 users",
-            "200 users",
-            "300 users"
+            "100",
+            "200",
+            "300",
+            "400",
+            "500"
         ],
         "data_generator": {
             "filters": {
                 "module": {
                     "value": "Painel"
                 },
+                "primitive": {
+                    "value": "Painel"
+                },
                 "latency": null,
                 "bytes": null
             },
-            "groupers": null,
-            "agg": {"latency":"median", "bytes":"max"}
+            "groupers": {
+                "column": "latency",
+                "type": "mean"
+            },
+            "agg": null
+        },
+        "graphic": {
+            "title": "Media de latencia x usuarios simultaneos",
+            "xlabel": "Usuarios",
+            "ylabel": "latencia"
         }
     }
 }

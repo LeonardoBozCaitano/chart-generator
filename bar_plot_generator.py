@@ -16,7 +16,7 @@ def generate(configuration):
     print(" - Ploting Horizontal Bar")
     file_data = common.read_file(configuration["file"])
     data = generate_dataset(file_data[configuration["fields"]], configuration["data_generator"])
-    generate_plot(data, configuration["outputfile"])
+    generate_plot(data, configuration["outputfile"], configuration["graphic"])
 
 # Gerar o dataset para montar o gráfico
 def generate_dataset(file_data, configuration):
@@ -28,15 +28,15 @@ def generate_dataset(file_data, configuration):
     return pd.DataFrame(grouped_data)
 
 # Gerar o grafico para ver a média de cada requisição de primitive.
-def generate_plot(data, output_file):
-    width_in_inches = 14
-    height_in_inches = 7
+def generate_plot(data, output_file, graphic):
+    width_in_inches = 12
+    height_in_inches = 8
     font_size = 12
 
     data.plot(kind='barh', figsize=(width_in_inches, height_in_inches))
-    plt.title('Média de latencia e bytes por primitiva')
-    plt.xlabel('Tempo')
-    plt.ylabel('(Modulo, primitiva)')
+    plt.title(graphic["title"])
+    plt.xlabel(graphic["xlabel"])
+    plt.ylabel(graphic["ylabel"])
 
     plt.tick_params(labelsize=8)
     plt.rc('font', size=font_size)          # controls default text sizes

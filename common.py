@@ -26,5 +26,5 @@ def filter_dataset(file_data, configuration):
             filtered_data = filtered_data[filtered_data["bytes"]>configuration["filters"]["bytes"]["value"]]
         if(configuration["filters"]["bytes"]["comparator"]=="lower"):
             filtered_data = filtered_data[filtered_data["bytes"]<configuration["filters"]["bytes"]["value"]]
-    
+
     return filtered_data
