@@ -14,18 +14,10 @@ pip install matplotlib
 ```bash
 python main.py
 ```
-
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
-
-timeStamp,date,elapsed,label,primitive,module,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,url,latency,idleTime,connect
-
-
-## To dos
-    criar um package para instalar todas dependencias solito
+"
+## To do's
+    * Colocar numeros do valor da coluna no plot bar tbm...
+    * Ver do pq não da pra passar acentos pelo JSON.
+    * Ver como tratar as responses que não são os numeros ali do responseCode
+        - quem sabe filtrar somente as que tem numero, ou das que são string pegar só uma quantidade X de caracteres.
+    * criar um package para instalar todas dependencias

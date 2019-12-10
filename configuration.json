@@ -1,29 +1,42 @@
 {
     "bar" : {
-        "plot": "false",
+        "plot": "true",
         "outputfile": "bar_result.png",
         "file": "../senior-results/testes.csv",
-        "fields": ["module", "primitive","latency", "bytes", "idleTime"],
+        "fields": ["module", "responseCode", "latency"],
         "data_generator": {
             "filters": {
-                "module": {
-                    "value": "Painel"
-                },
+                "module": null,
                 "primitive": null,
                 "latency": null,
                 "bytes": null
             },
-            "groupers": ["module", "primitive"],
-            "agg": {"latency":"median", "bytes":"median", "idleTime":"median"}
+            "groupers": ["module", "responseCode"],
+            "order": "latency",
+            "agg": {"latency": "mean", "responseCode": "count"}
         },
         "graphic": {
-            "title": "Media de latencia e bytes por primitiva",
+            "title": "Média de latência por Primitiva",
             "xlabel": "Tempo",
-            "ylabel": "(Modulo, primitiva)"
+            "ylabel": "(Módulo, Primitiva)",
+            "lines": [
+                {   
+                    "x": 3000,
+                    "color": "green"
+                },
+                {   
+                    "x": 5000,
+                    "color": "yellow"
+                },
+                {   
+                    "x": 10000,
+                    "color": "red"
+                }
+            ]
         }
     },
     "chart": {
-        "plot": "true",
+        "plot": "false",
         "outputfile": "chart_result.png",
         "files": [
             "../senior-results/testes.csv",
@@ -45,7 +58,7 @@
                     "value": "Painel"
                 },
                 "primitive": {
-                    "value": "Painel"
+                    "value": "feedback/all"
                 },
                 "latency": null,
                 "bytes": null
@@ -57,9 +70,9 @@
             "agg": null
         },
         "graphic": {
-            "title": "Media de latencia x usuarios simultaneos",
-            "xlabel": "Usuarios",
-            "ylabel": "latencia"
+            "title": "Média de latência x Quantidade de usuários simultâneos",
+            "xlabel": "Qtd. usuários",
+            "ylabel": "Latência"
         }
     }
 }

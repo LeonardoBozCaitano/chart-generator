@@ -6,8 +6,8 @@ from pprint import pprint
 
 def main():
     # configuração para plot
-    with open('configuration.json') as f:
-        configuration = json.load(f)
+    with open('configuration.json', encoding='utf-8') as f:
+        configuration = json.load(f) 
 
     print("# Process running... ")
 

@@ -70,9 +70,8 @@ def generate_data(file_data, configuration):
 
 #add bar
 def add_bar(ax,rects):
-    hfont2 = {'fontname':'Helvetica','fontsize':12}
     for rect in rects:
         height = rect.get_height()
         ax.text(rect.get_x() + rect.get_width()/2. - .13, 1.0*height + 3,
                 '{:10.2f}'.format(round(height,2)),
-                ha='center', va='bottom',**hfont2)
+                ha='center', va='bottom')

@@ -1,6 +1,8 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+from matplotlib import cm
 import common
 
 ###
@@ -25,6 +27,9 @@ def generate_dataset(file_data, configuration):
     #grouper
     grouped_data = filtered_data.groupby(configuration["groupers"]).agg(configuration["agg"])
 
+    #order
+    grouped_data = grouped_data.sort_values(configuration["order"], ascending=False)
+    
     return pd.DataFrame(grouped_data)
 
 # Gerar o grafico para ver a média de cada requisição de primitive.
@@ -33,10 +38,15 @@ def generate_plot(data, output_file, graphic):
     height_in_inches = 8
     font_size = 12
 
-    data.plot(kind='barh', figsize=(width_in_inches, height_in_inches))
+    fig, ax = plt.subplots()
+    data.plot(kind='barh', figsize=(width_in_inches, height_in_inches), ax=ax, legend="reverse")
+    #data.plot(kind='barh', figsize=(width_in_inches, height_in_inches), stacked=True, ax=ax)
+
+    for line in graphic["lines"]:
+        plt.plot(np.linspace(50000, -1, line["x"]), color=line["color"])
+
     plt.title(graphic["title"])
     plt.xlabel(graphic["xlabel"])
-    plt.ylabel(graphic["ylabel"])
 
     plt.tick_params(labelsize=8)
     plt.rc('font', size=font_size)          # controls default text sizes

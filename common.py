@@ -4,6 +4,8 @@ import pandas as pd
 def read_file(file):
     file_data = pd.read_csv(file)
     file_data['date'] = file_data['date'].astype('datetime64')
+    file_data['responseCodeText'] = file_data['responseCode']
+    file_data['responseCode'] = file_data['responseCode'].str[:3]
 
     return file_data
 
@@ -14,6 +16,9 @@ def filter_dataset(file_data, configuration):
     #filters
     if(configuration["filters"]["module"]): #by module
         filtered_data = filtered_data[filtered_data['module']==configuration["filters"]["module"]["value"]]
+        
+    if(configuration["filters"]["primitive"]): #by primitive
+        filtered_data = filtered_data[filtered_data['primitive']==configuration["filters"]["primitive"]["value"]]
     
     if(configuration["filters"]["latency"]): #by latency
         if(configuration["filters"]["latency"]["comparator"]=="bigger"):
